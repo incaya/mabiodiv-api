@@ -1,1 +1,1 @@
-# mabiodiv-api
+# mabiodiv-api - Apollo GraphQL project
