@@ -1,4 +1,5 @@
 const { ApolloServer } = require('apollo-server-micro');
+const cors = require('micro-cors')()
 
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
@@ -18,16 +19,22 @@ const server = new ApolloServer({
   playground: true,
 });
 
-const eraseDatabaseOnSync = true;
-sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
-  if (eraseDatabaseOnSync) {
-    createTaxons();
-    //createObservations();
-    //createUsersWithObservations();
-  }  
-});
+// const eraseDatabaseOnSync = true;
+// sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
+//   if (eraseDatabaseOnSync) {
+//     createTaxons();
+//     //createObservations();
+//     //createUsersWithObservations();
+//   }  
+// });
 
-module.exports = server.createHandler({ path: '/api' });
+module.exports = cors((req, res) => {
+  if (req.method === 'OPTIONS') {
+    res.end()
+    return
+  }
+  return server.createHandler({ path: '/api' })(req, res);
+})
 
 const createTaxons = async () => {
   await models.Famille.create(
