@@ -6,7 +6,7 @@ module.exports =  gql`
     observation(id: ID!): Observation!
   }
   extend type Mutation {
-    createObservation(text: String!): Observation!
+    createObservation(date: String!, point: Point!): Observation!
     deleteObservation(id: ID!): Boolean!
   }
   type Observation {

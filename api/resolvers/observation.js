@@ -8,10 +8,12 @@ module.exports =  {
       },
     },
     Mutation: {
-      createObservation: async (parent, { text }, { me, models }) => {
+      createObservation: async (parent, { date, point }, { me, models }) => {
         return await models.Observation.create({
-          text,
-          userId: me.id,
+          date: new Date(date),
+          point,
+          taxonId: 1,
+          userId: 1,
         });
       },
       deleteObservation: async (parent, { id }, { models }) => {

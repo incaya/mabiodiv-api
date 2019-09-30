@@ -1,5 +1,9 @@
 const { PointObject } = require('graphql-geojson');
 
 module.exports =  {
-    Point: PointObject
+    Point: {
+        type: "Feature",
+        geometry: PointObject,
+        properties: {}
+    }
 }
