@@ -1,3 +1,5 @@
+var { FamilleLoader } = require('../loaders/famille');
+  
 module.exports =  {
     Query: {
       taxons: async (parent, args, { models }) => {
@@ -9,7 +11,7 @@ module.exports =  {
     },
     Taxon: {
       famille: async (taxon, args, { models }) => {
-        return await models.Famille.findByPk(taxon.familleId);
+        return await FamilleLoader.load(taxon.familleId);
       },
     },
   };

@@ -1,3 +1,6 @@
+var { TaxonLoader } = require('../loaders/taxon');
+var { UserLoader } = require('../loaders/user');
+
 module.exports =  {
     Query: {
       observations: async (parent, args, { models }) => {
@@ -22,10 +25,13 @@ module.exports =  {
     },
     Observation: {
       user: async (observation, args, { models }) => {
-        return await models.User.findByPk(observation.userId);
+        return await UserLoader.load(observation.userId);
       },
       taxon: async (observation, args, { models }) => {
-        return await models.Taxon.findByPk(observation.taxonId);
+        return await TaxonLoader.load(observation.taxonId);
       },
+      // taxon: async (observation, args, { models }) => {
+      //   return await models.Taxon.findByPk(observation.taxonId);
+      // },
     },
   };

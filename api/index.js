@@ -3,6 +3,7 @@ const cors = require('micro-cors')()
 
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
+const loaders = require('./loaders');
 var { models, sequelize } = require('./models');
 
 var fs = require('fs');
